@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Plum Notes</string>
     <string name="action_settings">Settings</string>
+    <string name="note_deletion" >USUŃ</string>
+    <string name="are_you_sure" >NA 100% CHCESZ USUNĄĆ ?? </string>
+    <string name="no" >NIE</string>
+    <string name="yes" >TAK</string>
+    <string name="fill_empty_fields">HALO KOLEGO PUSTE POLA</string>
 </resources>
