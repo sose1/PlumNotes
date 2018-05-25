@@ -7,5 +7,27 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".CreateNoteActivity"
     tools:showIn="@layout/create_note_activity">
+    <EditText
+        android:id="@+id/noteCreateTitle"
+        android:layout_width="218dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Tytuł"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/noteCreateContent"
+        android:layout_width="281dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Treść notatki"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noteCreateTitle" />
 </android.support.constraint.ConstraintLayout>

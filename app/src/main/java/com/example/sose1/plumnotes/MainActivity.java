@@ -1,11 +1,8 @@
 package com.example.sose1.plumnotes;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.ReceiverCallNotAllowedException;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,11 +13,9 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-import static java.security.AccessController.getContext;
-
 public class MainActivity extends AppCompatActivity {
 
-
+    ArrayList<Note> noteArrayList;
     RecyclerView recyclerView;
     MyAdapter myAdapter;
 
@@ -28,17 +23,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.notes);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_note);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        myAdapter = new MyAdapter(getApplicationContext());
-        recyclerView.setAdapter(myAdapter);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_note);
         recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        noteArrayList = new ArrayList<>();
+
+        MyAdapter myAdapter = new MyAdapter(this,noteArrayList);
+        recyclerView.setAdapter(myAdapter);
+        myAdapter.notifyDataSetChanged();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

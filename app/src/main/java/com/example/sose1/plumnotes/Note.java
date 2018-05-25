@@ -18,19 +18,22 @@ public class Note {
         this.content = content;
     }
 
+    public Note(String title, String content) {
+    }
 
-    public static ArrayList<Note> noteList(Context context){
+
+    public static ArrayList<Note> noteArrayList(Context context){
         dbHelper = new DBHelper(context);
 
         Cursor cursor = dbHelper.getAllNotes();
-        ArrayList<Note> noteList;
+        ArrayList<Note> noteArrayList;
 
         if(cursor.getCount() == 0){
             cursor.close();
             return new ArrayList<Note>();
         }
 
-        noteList = new ArrayList<>();
+        noteArrayList = new ArrayList<>();
 
         while (cursor.moveToNext()){
 
@@ -39,10 +42,10 @@ public class Note {
                     cursor.getString(1),
                     cursor.getString(2));
 
-            noteList.add(note);
+            noteArrayList.add(note);
         }
         cursor.close();
-        return noteList;
+        return noteArrayList;
     }
     public int getID() {
         return ID;

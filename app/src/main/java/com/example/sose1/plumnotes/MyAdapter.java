@@ -10,15 +10,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private Context context;
     private MyAdapter myAdapter;
+    private ArrayList<Note> noteArrayList;
     DBHelper dbHelper;
 
 
-    public MyAdapter(Context context) {
+    public MyAdapter(Context context, ArrayList<Note> noteArrayList) {
         this.context = context;
+        this.noteArrayList = noteArrayList;
         this.myAdapter = this;
     }
 
@@ -32,12 +36,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         dbHelper = new DBHelper(context);
-        final Note note = Note.noteList(context).get(position);
+        final Note note = Note.noteArrayList(context).get(position);
 
-        holder.noteTitle.setText(note.getTitle());
-        holder.noteContent.setText(note.getContent());
+        holder.note_title.setText(note.getTitle());
+        holder.note_content.setText(note.getContent());
 
-        holder.noteDeleteButton.setOnClickListener(new View.OnClickListener() {
+        holder.note_delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -63,20 +67,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return Note.noteList(context).size();
+        return Note.noteArrayList(context).size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView noteTitle, noteContent;
-        Button noteDeleteButton;
+        TextView note_title, note_content;
+        Button note_delete_button;
 
 
         ViewHolder(View itemView) {
             super(itemView);
-            noteTitle = itemView.findViewById(R.id.note_title);
-            noteContent = itemView.findViewById(R.id.note_content);
-            noteDeleteButton = itemView.findViewById(R.id.note_delete_button);
+            note_title = itemView.findViewById(R.id.note_title);
+            note_content = itemView.findViewById(R.id.note_content);
+            note_delete_button = itemView.findViewById(R.id.note_delete_button);
         }
     }
 

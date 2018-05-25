@@ -26,6 +26,8 @@ public class DBHelper extends SQLiteOpenHelper{
 
         database.insert("notes", null, contentValues);
         database.close();
+
+        System.out.println("ADD NOTE");
     }
 
 
@@ -34,6 +36,8 @@ public class DBHelper extends SQLiteOpenHelper{
         String sqlNotes = "DELETE FROM notes WHERE ID = " + ID;
         database.execSQL(sqlNotes);
         database.close();
+
+        System.out.println("DELETE NOTE");
     }
 
 
@@ -50,6 +54,7 @@ public class DBHelper extends SQLiteOpenHelper{
                 "content VARCHAR)";
         database.execSQL(sqlNotes);
 
+        System.out.println("CREATE TABLE");
     }
 
 
@@ -60,6 +65,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
         onCreate(database);
 
+        System.out.println("UPGRADE TABLE");
     }
 
 
