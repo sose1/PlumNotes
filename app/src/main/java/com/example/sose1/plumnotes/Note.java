@@ -18,9 +18,6 @@ public class Note {
         this.content = content;
     }
 
-    public Note(String title, String content) {
-    }
-
 
     public static ArrayList<Note> noteArrayList(Context context){
         dbHelper = new DBHelper(context);

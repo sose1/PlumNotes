@@ -50,6 +50,7 @@ public class DBHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase database) {
         String sqlNotes = "CREATE TABLE notes(" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "title VARCHAR, " +
                 "content VARCHAR)";
         database.execSQL(sqlNotes);

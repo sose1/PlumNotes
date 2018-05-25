@@ -19,8 +19,8 @@ public class CreateNoteActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_note_activity);
 
-        noteCreateTitle = findViewById(R.id.create_note_title);
-        noteCreateContent = findViewById(R.id.create_note_content);
+        noteCreateTitle = findViewById(R.id.noteCreateTitle);
+        noteCreateContent = findViewById(R.id.noteCreateContent);
 
 
         dbHelper = new DBHelper(this);
@@ -32,7 +32,7 @@ public class CreateNoteActivity extends AppCompatActivity{
                 String title = noteCreateTitle.getText().toString();
                 String content = noteCreateContent.getText().toString();
 
-                if(noteCreateTitle != null || noteCreateContent != null){
+                if(noteCreateTitle != null && noteCreateContent != null){
                     dbHelper.addNote(title, content);
                     emptyFields();
                     Intent intent = new Intent(CreateNoteActivity.this, MainActivity.class);
