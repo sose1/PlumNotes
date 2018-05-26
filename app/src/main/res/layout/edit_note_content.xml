@@ -5,33 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".CreateNoteActivity"
-    tools:showIn="@layout/create_note_activity">
+    tools:context=".EditNoteActivity"
+    tools:showIn="@layout/edit_note_activity">
+
     <EditText
-        android:id="@+id/noteCreateTitle"
+        android:id="@+id/noteEditTitle"
         android:layout_width="218dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Tytuł"
         android:inputType="text"
+        android:text="@string/note_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/noteCreateContent"
+        android:id="@+id/noteEditContent"
         android:layout_width="309dp"
         android:layout_height="211dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Treść notatki"
-        android:inputType="textMultiLine"
+        android:inputType="text"
+        android:text="@string/note_content"
         android:selectAllOnFocus="true"
         android:singleLine="false"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noteCreateTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/noteEditTitle" />
 </android.support.constraint.ConstraintLayout>

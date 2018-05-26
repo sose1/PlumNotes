@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateNoteActivity">
+    tools:context=".EditNoteActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,21 +21,22 @@
     </android.support.design.widget.AppBarLayout>
 
     <include
-        android:id="@+id/include"
-        layout="@layout/create_note_content" />
+        android:id="@+id/include2"
+        layout="@layout/edit_note_content" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab1"
+        android:id="@+id/fab2"
         android:layout_width="70dp"
         android:layout_height="73dp"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        app:layout_anchor="@+id/include"
+        app:layout_anchor="@+id/include2"
         app:layout_anchorGravity="right|top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_add"
+        app:srcCompat="@android:drawable/ic_menu_edit"
         tools:ignore="MissingConstraints" />
+
 
 </android.support.design.widget.CoordinatorLayout>

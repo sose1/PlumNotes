@@ -3,6 +3,7 @@ package com.example.sose1.plumnotes;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,7 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         dbHelper = new DBHelper(context);
         final Note note = Note.noteArrayList(context).get(position);
 
@@ -62,6 +64,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     }
                 });
                 alertDialog.show();
+
+            }
+        });
+        holder.note_edit_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(context, EditNoteActivity.class);
+                context.startActivity(intent);
             }
         });
     }
@@ -74,14 +84,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView note_title, note_content;
-        Button note_delete_button;
-
+        Button note_delete_button, note_edit_button;
 
         ViewHolder(View itemView) {
             super(itemView);
             note_title = itemView.findViewById(R.id.note_title);
             note_content = itemView.findViewById(R.id.note_content);
             note_delete_button = itemView.findViewById(R.id.note_delete_button);
+            note_edit_button = itemView.findViewById(R.id.note_edit_button);
         }
     }
 

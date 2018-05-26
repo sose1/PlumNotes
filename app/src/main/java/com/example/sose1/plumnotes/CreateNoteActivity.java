@@ -7,12 +7,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
 
 public class CreateNoteActivity extends AppCompatActivity{
 
     DBHelper dbHelper;
     EditText noteCreateTitle, noteCreateContent;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,25 +33,18 @@ public class CreateNoteActivity extends AppCompatActivity{
                 String title = noteCreateTitle.getText().toString();
                 String content = noteCreateContent.getText().toString();
 
-                if(noteCreateTitle != null && noteCreateContent != null){
-                    dbHelper.addNote(title, content);
-                    emptyFields();
-                    Intent intent = new Intent(CreateNoteActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-                else{
-                    System.out.println("spierdalaj");
+                if (title.equalsIgnoreCase("") || content.equalsIgnoreCase("")){
+                    Toast.makeText(getApplicationContext(), getString(R.string.fill_empty_fields), Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
-
-//                if (title.equalsIgnoreCase("") || content.equalsIgnoreCase("")){
-//                    Snackbar.make(view, getString(R.string.fill_empty_fields), Snackbar.LENGTH_LONG)
-//                            .setAction("Action", null).show();
-//                    return;
-//                }
+                Toast.makeText(getApplicationContext(), getString(R.string.info_create_note), Toast.LENGTH_SHORT).show();
+                dbHelper.addNote(title, content);
+                emptyFields();
+                Intent intent = new Intent(CreateNoteActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 

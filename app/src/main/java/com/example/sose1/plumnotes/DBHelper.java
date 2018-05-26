@@ -16,37 +16,6 @@ public class DBHelper extends SQLiteOpenHelper{
         super(context, DB_BASE, null, DB_VERSION);
     }
 
-
-    public void addNote(String title, String content){
-        SQLiteDatabase database = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put("title", title);
-        contentValues.put("content", content);
-
-        database.insert("notes", null, contentValues);
-        database.close();
-
-        System.out.println("ADD NOTE");
-    }
-
-
-    public void delNote(int ID){
-        SQLiteDatabase database = getWritableDatabase();
-        String sqlNotes = "DELETE FROM notes WHERE ID = " + ID;
-        database.execSQL(sqlNotes);
-        database.close();
-
-        System.out.println("DELETE NOTE");
-    }
-
-
-    public Cursor getAllNotes(){
-        SQLiteDatabase database = getWritableDatabase();
-        return database.rawQuery("SELECT * from notes", null);
-    }
-
-
     @Override
     public void onCreate(SQLiteDatabase database) {
         String sqlNotes = "CREATE TABLE notes(" +
@@ -69,5 +38,37 @@ public class DBHelper extends SQLiteOpenHelper{
         System.out.println("UPGRADE TABLE");
     }
 
+    public void addNote(String title, String content){
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
 
+        contentValues.put("title", title);
+        contentValues.put("content", content);
+
+        database.insert("notes", null, contentValues);
+        database.close();
+
+        System.out.println("ADD NOTE");
+    }
+
+    public void delNote(int ID){
+        SQLiteDatabase database = getWritableDatabase();
+        String sqlNotes = "DELETE FROM notes WHERE ID = " + ID;
+        database.execSQL(sqlNotes);
+        database.close();
+
+        System.out.println("DELETE NOTE");
+    }
+
+    public void updateNote(int ID){
+        SQLiteDatabase database = getWritableDatabase();
+        String sqlNotes = "UPDATE notes SET title ='title', content='content' WHERE ID = " + ID;
+        database.execSQL(sqlNotes);
+        database.close();
+    }
+
+    public Cursor getAllNotes(){
+        SQLiteDatabase database = getWritableDatabase();
+        return database.rawQuery("SELECT * from notes", null);
+    }
 }
