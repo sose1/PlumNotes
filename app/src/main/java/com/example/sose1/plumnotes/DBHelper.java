@@ -60,13 +60,15 @@ public class DBHelper extends SQLiteOpenHelper{
         System.out.println("DELETE NOTE");
     }
 
-    public void updateNote(int ID){
-        SQLiteDatabase database = getWritableDatabase();
-        String sqlNotes = "UPDATE notes SET title ='title', content='content' WHERE ID = " + ID;
-        database.execSQL(sqlNotes);
+    public void updateNote( int ID, String title ,String content) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("title",title);
+        contentValues.put("content",content);
+
+        database.update("notes", contentValues, "ID =" + ID, null );
         database.close();
     }
-
     public Cursor getAllNotes(){
         SQLiteDatabase database = getWritableDatabase();
         return database.rawQuery("SELECT * from notes", null);

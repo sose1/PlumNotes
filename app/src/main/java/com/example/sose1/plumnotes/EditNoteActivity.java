@@ -24,10 +24,16 @@ public class EditNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_note_activity);
 
-
         noteEditTitle = findViewById(R.id.noteEditTitle);
         noteEditContent = findViewById(R.id.noteEditContent);
-        
+
+        Intent intent = getIntent();
+        final int ID = intent.getIntExtra("ID",0);
+        String title = intent.getStringExtra("title");
+        String content = intent.getStringExtra("content");
+
+        noteEditTitle.setText(title);
+        noteEditContent.setText(content);
 
         dbHelper = new DBHelper(this);
 
@@ -45,7 +51,7 @@ public class EditNoteActivity extends AppCompatActivity {
                 }
 
                 Toast.makeText(getApplicationContext(), getString(R.string.info_edit_note), Toast.LENGTH_SHORT).show();
-
+                dbHelper.updateNote(ID, title, content);
 
                 emptyFields();
                 Intent intent = new Intent(EditNoteActivity.this, MainActivity.class);
