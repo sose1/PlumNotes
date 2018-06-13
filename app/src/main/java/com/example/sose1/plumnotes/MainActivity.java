@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Note> noteArrayList;
     RecyclerView recyclerView;
-    MyAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

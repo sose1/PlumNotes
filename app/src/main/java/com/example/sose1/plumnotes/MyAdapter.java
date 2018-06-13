@@ -6,12 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,10 +41,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         dbHelper = new DBHelper(context);
         final Note note = Note.noteArrayList(context).get(position);
 
-        holder.note_title.setText(note.getTitle());
-        holder.note_content.setText(note.getContent());
+        holder.noteTitle.setText(note.getTitle());
+        holder.noteContent.setText(note.getContent());
 
-        holder.note_delete_button.setOnClickListener(new View.OnClickListener() {
+
+        holder.noteDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -67,13 +68,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
             }
         });
-        holder.note_edit_button.setOnClickListener(new View.OnClickListener(){
+
+
+        holder.noteEditButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(context, EditNoteActivity.class);
 
-                String title = holder.note_title.getText().toString();
-                String content = holder.note_content.getText().toString();
+                String title = holder.noteTitle.getText().toString();
+                String content = holder.noteContent.getText().toString();
                 int ID = note.getID();
 
                 intent.putExtra("ID", ID);
@@ -91,15 +94,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView note_title, note_content;
-        Button note_delete_button, note_edit_button;
+        TextView noteTitle, noteContent;
+        Button noteDeleteButton, noteEditButton;
 
         ViewHolder(View itemView) {
             super(itemView);
-            note_title = itemView.findViewById(R.id.note_title);
-            note_content = itemView.findViewById(R.id.note_content);
-            note_delete_button = itemView.findViewById(R.id.note_delete_button);
-            note_edit_button = itemView.findViewById(R.id.note_edit_button);
+            noteTitle = itemView.findViewById(R.id.note_title);
+            noteContent = itemView.findViewById(R.id.note_content);
+            noteDeleteButton = itemView.findViewById(R.id.note_delete_button);
+            noteEditButton = itemView.findViewById(R.id.note_edit_button);
         }
     }
 

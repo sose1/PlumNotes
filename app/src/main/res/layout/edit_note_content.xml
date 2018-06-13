@@ -9,7 +9,7 @@
     tools:showIn="@layout/edit_note_activity">
 
     <EditText
-        android:id="@+id/noteEditTitle"
+        android:id="@+id/note_edit_title"
         android:layout_width="218dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
@@ -21,16 +21,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/noteEditContent"
+        android:id="@+id/note_edit_content"
         android:layout_width="309dp"
         android:layout_height="211dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:text="@string/note_content"
         android:selectAllOnFocus="true"
         android:singleLine="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noteEditTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/note_edit_title" />
+
+    <Button
+        android:id="@+id/edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text=" Zapisz zmiany"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/note_edit_title"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
