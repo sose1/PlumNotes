@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +41,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         dbHelper = new DBHelper(context);
         final Note note = Note.noteArrayList(context).get(position);
 
+
         holder.noteTitle.setText(note.getTitle());
         holder.noteContent.setText(note.getContent());
+        holder.cardView.setCardBackgroundColor(note.getColor());
 
 
         holder.noteDeleteButton.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +98,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         TextView noteTitle, noteContent;
         Button noteDeleteButton, noteEditButton;
+        CardView cardView;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -103,8 +106,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             noteContent = itemView.findViewById(R.id.note_content);
             noteDeleteButton = itemView.findViewById(R.id.note_delete_button);
             noteEditButton = itemView.findViewById(R.id.note_edit_button);
+            cardView = itemView.findViewById(R.id.card_view_note);
         }
+
     }
-
-
 }

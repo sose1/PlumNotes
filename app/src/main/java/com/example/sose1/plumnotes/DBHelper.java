@@ -21,8 +21,10 @@ public class DBHelper extends SQLiteOpenHelper{
         String sqlNotes = "CREATE TABLE notes(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "title VARCHAR, " +
-                "content VARCHAR)";
-        database.execSQL(sqlNotes);
+                "content VARCHAR, " +
+                "color INTEGER )";
+
+                database.execSQL(sqlNotes);
 
         System.out.println("CREATE TABLE");
     }
@@ -38,12 +40,13 @@ public class DBHelper extends SQLiteOpenHelper{
         System.out.println("UPGRADE TABLE");
     }
 
-    public void addNote(String title, String content){
+    public void addNote(String title, String content, int color){
         SQLiteDatabase database = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("title", title);
         contentValues.put("content", content);
+        contentValues.put("color", color);
 
         database.insert("notes", null, contentValues);
         database.close();
