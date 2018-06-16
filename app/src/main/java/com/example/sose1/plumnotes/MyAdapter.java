@@ -41,16 +41,33 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         dbHelper = new DBHelper(context);
         final Note note = Note.noteArrayList(context).get(position);
 
+        holder.cardView.setCardBackgroundColor(note.getColor());
 
         holder.noteTitle.setText(note.getTitle());
         holder.noteContent.setText(note.getContent());
-        holder.cardView.setCardBackgroundColor(note.getColor());
 
+
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(context, EditNoteActivity.class);
+
+                String title = holder.noteTitle.getText().toString();
+                String content = holder.noteContent.getText().toString();
+                int ID = note.getID();
+
+                intent.putExtra("ID", ID);
+                intent.putExtra("title", title);
+                intent.putExtra("content",content);
+                context.startActivity(intent);
+                return true;
+            }
+        });
 
         holder.noteDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 AlertDialog alertDialog = new AlertDialog.Builder(context).create();
                 alertDialog.setTitle(context.getString(R.string.note_deletion));
                 alertDialog.setMessage(context.getString(R.string.are_you_sure));
@@ -67,26 +84,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     }
                 });
                 alertDialog.show();
-
             }
         });
 
-
-        holder.noteEditButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(context, EditNoteActivity.class);
-
-                String title = holder.noteTitle.getText().toString();
-                String content = holder.noteContent.getText().toString();
-                int ID = note.getID();
-
-                intent.putExtra("ID", ID);
-                intent.putExtra("title", title);
-                intent.putExtra("content",content);
-                context.startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -97,7 +97,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView noteTitle, noteContent;
-        Button noteDeleteButton, noteEditButton;
+        Button noteDeleteButton;
         CardView cardView;
 
         ViewHolder(View itemView) {
@@ -105,9 +105,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             noteTitle = itemView.findViewById(R.id.note_title);
             noteContent = itemView.findViewById(R.id.note_content);
             noteDeleteButton = itemView.findViewById(R.id.note_delete_button);
-            noteEditButton = itemView.findViewById(R.id.note_edit_button);
             cardView = itemView.findViewById(R.id.card_view_note);
         }
 
     }
+
 }
