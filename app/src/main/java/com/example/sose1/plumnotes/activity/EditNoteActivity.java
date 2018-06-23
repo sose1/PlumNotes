@@ -1,4 +1,4 @@
-package com.example.sose1.plumnotes;
+package com.example.sose1.plumnotes.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.sose1.plumnotes.database.DBHelper;
+import com.example.sose1.plumnotes.R;
 
 public class EditNoteActivity extends AppCompatActivity {
 
@@ -50,8 +53,14 @@ public class EditNoteActivity extends AppCompatActivity {
                 emptyFields();
                 Intent intent = new Intent(EditNoteActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     public void emptyFields() {

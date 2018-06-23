@@ -1,4 +1,4 @@
-package com.example.sose1.plumnotes;
+package com.example.sose1.plumnotes.database;
 
 import android.content.ContentValues;
 import android.content.Context;

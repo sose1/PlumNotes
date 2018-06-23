@@ -1,4 +1,4 @@
-package com.example.sose1.plumnotes;
+package com.example.sose1.plumnotes.note;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,6 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.sose1.plumnotes.database.DBHelper;
+import com.example.sose1.plumnotes.R;
+import com.example.sose1.plumnotes.activity.EditNoteActivity;
 
 import java.util.ArrayList;
 

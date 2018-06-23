@@ -1,11 +1,9 @@
-package com.example.sose1.plumnotes;
+package com.example.sose1.plumnotes.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -13,8 +11,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.sose1.plumnotes.note.MyAdapter;
+import com.example.sose1.plumnotes.note.Note;
+import com.example.sose1.plumnotes.R;
+
 import java.util.ArrayList;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, CreateNoteActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

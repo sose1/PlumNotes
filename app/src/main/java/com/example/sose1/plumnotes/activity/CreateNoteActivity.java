@@ -1,16 +1,16 @@
-package com.example.sose1.plumnotes;
+package com.example.sose1.plumnotes.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.sose1.plumnotes.database.DBHelper;
+import com.example.sose1.plumnotes.R;
 
 import java.util.Random;
 
@@ -81,6 +81,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         emptyFields();
         Intent intent = new Intent(CreateNoteActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void getDataNote(){
@@ -91,14 +92,13 @@ public class CreateNoteActivity extends AppCompatActivity {
     public int getRandomColor(){
         Random rnd = new Random();
 
-        int r = rnd.nextInt(128) + 127; // 128 ... 255
-        int g = rnd.nextInt(128) + 127; // 128 ... 255
-        int b = rnd.nextInt(128) + 127; // 128 ... 255
+        int r = rnd.nextInt(128) + 117; // 128 ... 255
+        int g = rnd.nextInt(128) + 117; // 128 ... 255
+        int b = rnd.nextInt(128) + 117; // 128 ... 255
 
         int clr = Color.rgb(r, g, b);
         return clr;
     }
-
 }
 
 

@@ -1,8 +1,9 @@
-package com.example.sose1.plumnotes;
+package com.example.sose1.plumnotes.note;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
+
+import com.example.sose1.plumnotes.database.DBHelper;
 
 import java.util.ArrayList;
 
