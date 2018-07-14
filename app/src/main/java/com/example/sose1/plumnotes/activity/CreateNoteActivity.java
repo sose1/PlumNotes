@@ -50,11 +50,10 @@ public class CreateNoteActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        if (isEmpty()) {
-        }
-        else {
+        if (!isEmpty()) {
             createNote();
         }
+
     }
 
     public void emptyFields(){

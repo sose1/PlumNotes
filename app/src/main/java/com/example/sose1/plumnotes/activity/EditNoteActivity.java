@@ -34,7 +34,7 @@ public class EditNoteActivity extends AppCompatActivity {
 
         dbHelper = new DBHelper(this);
 
-        Button editButton = findViewById(R.id.edit_button);
+        Button editButton = (Button) findViewById(R.id.edit_button);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
