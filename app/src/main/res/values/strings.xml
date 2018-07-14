@@ -10,4 +10,6 @@
     <string name="info_edit_note">Zapisywanie zmian...</string>
     <string name="note_title">Nazwa notatki</string>
     <string name="note_content">Treść notatki</string>
+    <string name="usun">Usuń</string>
+    <string name="edytuj">Edytuj</string>
 </resources>

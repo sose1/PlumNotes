@@ -1,5 +1,6 @@
 package com.example.sose1.plumnotes.note;
 
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,14 +9,17 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
+import com.example.sose1.plumnotes.activity.EditNoteActivity;
 import com.example.sose1.plumnotes.database.DBHelper;
 import com.example.sose1.plumnotes.R;
-import com.example.sose1.plumnotes.activity.EditNoteActivity;
+
 
 import java.util.ArrayList;
 
@@ -51,46 +55,33 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.noteContent.setText(note.getContent());
 
 
-        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(View view) {
-                Intent intent = new Intent(context, EditNoteActivity.class);
-
-                String title = holder.noteTitle.getText().toString();
-                String content = holder.noteContent.getText().toString();
-                int ID = note.getID();
-
-                intent.putExtra("ID", ID);
-                intent.putExtra("title", title);
-                intent.putExtra("content",content);
-                context.startActivity(intent);
-                return true;
-            }
-        });
-
-        holder.noteDeleteButton.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                alertDialog.setTitle(context.getString(R.string.note_deletion));
-                alertDialog.setMessage(context.getString(R.string.are_you_sure));
-                alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.no), new DialogInterface.OnClickListener() {
+                PopupMenu popupMenu = new PopupMenu(context,view);
+                popupMenu.getMenuInflater().inflate(R.menu.poupup_menu, popupMenu.getMenu());
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()){
+                            case R.id.one:
+                                Toast.makeText(context,"Edytowanie",Toast.LENGTH_SHORT).show();
+                                actionWhenClickEdit(holder, note);
+                                break;
+
+                            case R.id.two:
+                                Toast.makeText(context,"Usuwanie", Toast.LENGTH_SHORT).show();
+                                actionWhenClickDelete(note);
+                                break;
+                        }
+
+                        return true;
                     }
                 });
-                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, context.getString(R.string.yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dbHelper.delNote(note.getID());
-                        myAdapter.notifyDataSetChanged();
-                    }
-                });
-                alertDialog.show();
+                popupMenu.show();
             }
         });
-
     }
 
     @Override
@@ -101,17 +92,48 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView noteTitle, noteContent;
-        Button noteDeleteButton;
         CardView cardView;
 
         ViewHolder(View itemView) {
             super(itemView);
             noteTitle = itemView.findViewById(R.id.note_title);
             noteContent = itemView.findViewById(R.id.note_content);
-            noteDeleteButton = itemView.findViewById(R.id.note_delete_button);
             cardView = itemView.findViewById(R.id.card_view_note);
         }
 
     }
 
+
+    public void actionWhenClickDelete(final Note note){
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle(context.getString(R.string.note_deletion));
+        alertDialog.setMessage(context.getString(R.string.are_you_sure));
+
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, context.getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dbHelper.delNote(note.getID());
+                myAdapter.notifyDataSetChanged();
+            }
+        });
+        alertDialog.show();
+    }
+
+    public void actionWhenClickEdit(ViewHolder holder, Note note){
+        Intent intent = new Intent(context, EditNoteActivity.class);
+
+        String title = holder.noteTitle.getText().toString();
+        String content = holder.noteContent.getText().toString();
+        int ID = note.getID();
+
+        intent.putExtra("ID", ID);
+        intent.putExtra("title", title);
+        intent.putExtra("content",content);
+        context.startActivity(intent);
+    }
 }
