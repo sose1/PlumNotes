@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.arasthel.spannedgridlayoutmanager.SpanLayoutParams;
+import com.arasthel.spannedgridlayoutmanager.SpanSize;
 import com.example.sose1.plumnotes.activity.EditNoteActivity;
 import com.example.sose1.plumnotes.database.DBHelper;
 import com.example.sose1.plumnotes.R;
@@ -23,18 +25,18 @@ import com.example.sose1.plumnotes.R;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     private Context context;
-    private MyAdapter myAdapter;
+    private NoteAdapter noteAdapter;
     private ArrayList<Note> noteArrayList;
-    DBHelper dbHelper;
+    private DBHelper dbHelper;
 
 
-    public MyAdapter(Context context, ArrayList<Note> noteArrayList) {
+    public NoteAdapter(Context context, ArrayList<Note> noteArrayList) {
         this.context = context;
         this.noteArrayList = noteArrayList;
-        this.myAdapter = this;
+        this.noteAdapter = this;
     }
 
     @NonNull
@@ -45,7 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         dbHelper = new DBHelper(context);
         final Note note = Note.noteArrayList(context).get(position);
 
@@ -53,7 +55,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         holder.noteTitle.setText(note.getTitle());
         holder.noteContent.setText(note.getContent());
-
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,12 +68,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                         switch (menuItem.getItemId()){
                             case R.id.one:
                                 Toast.makeText(context,"Edytowanie",Toast.LENGTH_SHORT).show();
-                                actionWhenClickEdit(holder, note);
+                                actionOnClickEdit(holder, note);
                                 break;
 
                             case R.id.two:
-                                Toast.makeText(context,"Usuwanie", Toast.LENGTH_SHORT).show();
-                                actionWhenClickDelete(note);
+                                actionOnClickDelete(note);
                                 break;
                         }
 
@@ -104,7 +104,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
 
-    public void actionWhenClickDelete(final Note note){
+    private void actionOnClickDelete(final Note note){
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.setTitle(context.getString(R.string.note_deletion));
         alertDialog.setMessage(context.getString(R.string.are_you_sure));
@@ -118,13 +118,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dbHelper.delNote(note.getID());
-                myAdapter.notifyDataSetChanged();
+                noteAdapter.notifyDataSetChanged();
             }
         });
         alertDialog.show();
     }
 
-    public void actionWhenClickEdit(ViewHolder holder, Note note){
+    private void actionOnClickEdit(ViewHolder holder, Note note){
         Intent intent = new Intent(context, EditNoteActivity.class);
 
         String title = holder.noteTitle.getText().toString();

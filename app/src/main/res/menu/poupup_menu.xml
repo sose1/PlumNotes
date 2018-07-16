@@ -8,5 +8,4 @@
     <item
         android:id="@+id/two"
         android:title="@string/usun"/>
-
 </menu>

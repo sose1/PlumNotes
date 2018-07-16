@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.sose1.plumnotes.note.MyAdapter;
+import com.arasthel.spannedgridlayoutmanager.SpannedGridLayoutManager;
+import com.example.sose1.plumnotes.note.NoteAdapter;
 import com.example.sose1.plumnotes.note.Note;
 import com.example.sose1.plumnotes.R;
 
@@ -26,18 +29,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.recycler_note);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         noteArrayList = new ArrayList<>();
 
-        MyAdapter myAdapter = new MyAdapter(this,noteArrayList);
-        recyclerView.setAdapter(myAdapter);
-        myAdapter.notifyDataSetChanged();
+        NoteAdapter noteAdapter = new NoteAdapter(this,noteArrayList);
+        recyclerView.setAdapter(noteAdapter);
+        noteAdapter.notifyDataSetChanged();
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
